@@ -1,52 +1,65 @@
 const display = document.getElementById('display');
 
+let firstValue;
+let secondValue;
+let opar;
+let result;
+
 function appendValue(inputValue) {
 
-    const lastChar = display.value.slice(-1);
-    const operators = ['+', '-', '*', '/'];
-
-    if (display.value === '' && operators.includes(inputValue)) {
-        return;
-    }
-
-    if (inputValue === '.' && lastChar === '.') {
-        return;
-    }
-
-    if (display.value === 'Error' || display.value === '' && operators.includes(inputValue)) {
-        return;
-    }
-
-    // if (operators.includes(inputValue) && !operators.includes(lastChar)) {
-    //     display.value = inputValue;
-    //     return;
-    // } else if (operators.includes(lastChar) && !operators.includes(inputValue)) {
-    //     display.value = inputValue;
-    //     return;
-    // }
-
-    if (operators.includes(lastChar) && operators.includes(inputValue)) {
-        display.value = display.value.slice(0, -1) + inputValue;
+    if (inputValue === '.' && display.value.includes('.')) {
         return;
     }
 
     display.value += inputValue;
 }
 
-function clearDisplay() {
+function appendOparator(oparator) {
+    firstValue = display.value;
     display.value = '';
+    opar = oparator;
+
 }
 
+
+function clearDisplay() {
+    display.value = '';
+    firstValue = undefined;
+    secondValue = undefined;
+    opar = undefined;
+    result = undefined;
+}
 function calculate() {
     try {
-        if (display.value === '') return;
-        let result = eval(display.value);//
+        if (firstValue === undefined || opar === undefined || display.value === '' || result !== undefined) return;
+        secondValue = display.value;
+        display.value = '';
+
+        switch (opar) {
+            case '+':
+                result = parseFloat(firstValue) + parseFloat(secondValue);
+                break;
+            case '-':
+                result = parseFloat(firstValue) - parseFloat(secondValue);
+                break;
+            case '*':
+                result = parseFloat(firstValue) * parseFloat(secondValue);
+                break;
+            case '/':
+                result = parseFloat(firstValue) / parseFloat(secondValue);
+                break;
+        }
+        console.log(result);
 
         if (result === Infinity || isNaN(result)) {
             display.value = 'Error';
             setTimeout(clearDisplay, 1500);
         } else {
             display.value = Math.round(result * 100000000) / 100000000; //Rounding
+            firstValue = display.value;
+            secondValue = undefined;
+            opar = undefined;
+            result = undefined;
         }
     } catch (e) {
         display.value = 'Error';

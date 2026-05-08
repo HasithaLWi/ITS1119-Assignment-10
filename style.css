@@ -10,8 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* Abstract background resembling the screenshot */
-    background: radial-gradient(circle at center, #627285, #111520);
+    background: #627285;
     background-size: cover;
 }
 
@@ -27,7 +26,8 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
-    width: 380px;
+    width: 40vw;
+        min-width: 300px;
 }
 
 .display {
@@ -61,7 +61,7 @@ body {
 }
 
 .btn:hover {
-    background-color: #d0d0d0;
+    background-color: #e98ef1;
 }
 
 .btn-operator {
@@ -69,7 +69,7 @@ body {
 }
 
 .btn-operator:hover {
-    background-color: #e2c0a3;
+    background-color: #e7ad7b;
 }
 
 .btn-clear {
@@ -79,7 +79,7 @@ body {
 }
 
 .btn-clear:hover {
-    background-color: #ffaa6e;
+    background-color: #f88f44;
 }
 
 .btn-equals {
@@ -89,5 +89,5 @@ body {
 }
 
 .btn-equals:hover {
-    background-color: #5bbdb6;
+    background-color: #39a79f;
 }
